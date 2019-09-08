@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    This file defines the menu items when right-clicking over parameters in Houdini.  
+-->
+
+<menuDocument>
+    <menu>
+	<!--Open Folder:Open File Manager Window-->
+		<subMenu id="operation_file">
+		<label>Operation </label><insertBefore />
+		<context><expression>len(kwargs['parms'])>0 and type(kwargs['parms'][0].parmTemplate()) is hou.StringParmTemplate</expression></context>
+		<scriptItem id="openfolder">
+		<label>Open Folder</label>
+		<scriptCode><![CDATA[
+import os
+path = kwargs['parms'][0].eval()		
+folder = os.path.dirname(path).replace("/","\\")
+os.startfile(folder)
+		]]></scriptCode>		
+		</scriptItem>
+		</subMenu>
+	</menu>
+</menuDocument>	
